@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily AI Lessons</title>
+    <title>Daily AI Lessons - 100+ Topics</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         * {
@@ -159,7 +159,7 @@
 <body>
     <div class="container">
         <h1>🤖 Daily AI Lessons</h1>
-        <p class="subtitle">Learn something new about AI and tech every day</p>
+        <p class="subtitle">100+ topics about AI and tech in 2025</p>
         
         <div class="lesson-container empty" id="lessonContainer">
             Click "Get Today's Lesson" to start learning!
@@ -171,82 +171,123 @@
         </div>
 
         <div class="stats" id="stats">
-            Lessons explored: 0
+            Lessons explored: 0 | Remaining: 100+
         </div>
     </div>
 
     <script>
+        const lessons = [
+            // Latest Models & Capabilities
+            {"title":"Claude Opus 4: Extended Thinking","category":"Latest Models","content":"Claude Opus 4, released in late 2024, introduced extended thinking capabilities that allow the model to reason through complex problems before responding. Unlike instant responses, Opus 4 can 'think' for several seconds, showing its reasoning process. This dramatically improves performance on coding, mathematics, and strategic planning tasks. The model can also use computer interfaces, browse the web, and execute code."},
+            {"title":"GPT-5 and Multimodal Understanding","category":"Latest Models","content":"OpenAI's GPT-5, expected in 2025, promises native video understanding, real-time voice with emotional intelligence, and dramatically improved reasoning. Early previews suggest it can analyze video content frame-by-frame, understand temporal relationships, and generate insights from visual data. The model's multimodal capabilities allow seamless switching between text, images, audio, and video in a single conversation."},
+            {"title":"Gemini 2.0 Flash: Speed Meets Intelligence","category":"Latest Models","content":"Google's Gemini 2.0 Flash offers GPT-4 level performance at twice the speed and half the cost. Released in early 2025, it features 1M+ token context windows, native multimodal understanding, and built-in tool use. Flash's speed makes it ideal for real-time applications like live translation, gaming NPCs, and interactive tutoring. It's optimized for both cloud and edge deployment."},
+            {"title":"Open Source LLMs in 2025","category":"Latest Models","content":"2025 sees truly competitive open-source models like Llama 4, Mistral Large 2, and Qwen 2.5. These models match or exceed GPT-4 performance on many benchmarks while being free to use and modify. The open-source community has also developed superior fine-tuning techniques, efficient quantization methods, and specialized variants for coding, reasoning, and multilingual tasks. Self-hosting is now practical and cost-effective."},
+            {"title":"Specialized AI Models vs. Generalists","category":"Model Selection","content":"2025 shows a split between generalist models (GPT, Claude, Gemini) and specialized models (coding-only, medical, legal). Specialized models like Code Llama 70B and Med-PaLM 2 outperform generalists in narrow domains by 20-40%. However, generalists excel at cross-domain tasks. Best practice: use specialists for high-stakes, domain-specific work; use generalists for versatility and general assistance."},
+            
+            // AI Agents & Automation
+            {"title":"Agentic AI Workflows","category":"AI Agents","content":"AI agents in 2025 can autonomously complete multi-step tasks by planning, executing, and self-correcting. They break complex goals into subtasks, use tools (APIs, browsers, databases), evaluate results, and adapt strategies. Frameworks like LangGraph, AutoGPT, and BabyAGI enable building agents that can research topics, write code, analyze data, and even manage projects with minimal human intervention."},
+            {"title":"Computer Use API: AI Controls Your PC","category":"AI Agents","content":"Claude's Computer Use API lets AI agents control computers by viewing screens, moving cursors, typing, and clicking. This enables automation of any desktop workflow - from data entry to complex software testing. The technology uses vision-language models to understand UI elements and coordinate actions. While still evolving, it's already used for QA automation, RPA replacement, and accessibility tools."},
+            {"title":"AI Agents with Memory","category":"AI Agents","content":"Modern AI agents maintain persistent memory across sessions, learning user preferences and building contextual understanding over time. Using vector databases and retrieval systems, agents remember past conversations, decisions, and outcomes. This enables personal AI assistants that improve with use, learning your communication style, work patterns, and preferences without explicit programming."},
+            {"title":"Multi-Agent Systems","category":"AI Agents","content":"Multi-agent architectures deploy specialized AI agents that collaborate to solve complex problems. For example: a research agent gathers information, an analysis agent processes data, and a writing agent creates reports. Agents communicate, delegate tasks, and combine expertise. Frameworks like AutoGen and CrewAI make building multi-agent systems accessible. This approach mirrors human teams and handles complexity better than single agents."},
+            {"title":"AI Agent Evaluation and Reliability","category":"AI Agents","content":"Evaluating AI agents requires testing beyond simple benchmarks. Key metrics include: task completion rate, step efficiency, error recovery, cost per task, and reliability under edge cases. Use simulation environments to test agents safely before production deployment. Implement human-in-the-loop verification for high-stakes decisions. Monitor agent behavior continuously - they can develop unexpected strategies to achieve goals."},
+            
+            // RAG & Knowledge Systems
+            {"title":"GraphRAG: Knowledge Graph Enhanced Retrieval","category":"RAG Systems","content":"GraphRAG combines knowledge graphs with traditional RAG to understand relationships between concepts. Instead of just retrieving similar text chunks, it traverses entity relationships, finds connected information, and provides more contextual answers. Especially powerful for complex domains like healthcare, legal, and research where relationships matter as much as individual facts. Microsoft's implementation shows 2-3x improvement over standard RAG."},
+            {"title":"Agentic RAG: Dynamic Information Retrieval","category":"RAG Systems","content":"Agentic RAG lets AI dynamically decide when and what to retrieve, rather than always searching a knowledge base. The agent evaluates questions, determines if retrieval is needed, formulates optimal queries, and iteratively refines searches. This reduces unnecessary retrievals, improves answer quality, and handles multi-step reasoning. It's the difference between a simple database lookup and intelligent research."},
+            {"title":"Multimodal RAG: Beyond Text","category":"RAG Systems","content":"2025's RAG systems handle images, videos, audio, and documents together. Vision-language models can search visual databases, retrieve relevant images, and explain why they're relevant. Use cases include: medical imaging databases, video content libraries, technical documentation with diagrams, and product catalogs. Embeddings now capture visual and textual semantics jointly for true multimodal search."},
+            {"title":"Self-RAG: Retrieval with Self-Reflection","category":"RAG Systems","content":"Self-RAG adds reflection tokens that let models evaluate whether retrieval is needed and if retrieved information is useful. The model can trigger retrieval mid-generation, assess relevance of results, and decide whether to use them. This reduces hallucinations by 40-60% compared to standard RAG while improving efficiency by avoiding unnecessary retrievals. It's becoming standard in production RAG systems."},
+            {"title":"RAG Chunking Strategies That Actually Work","category":"RAG Best Practices","content":"Effective chunking in 2025: use semantic chunking (split at topic boundaries), maintain 400-600 token chunks with 20% overlap, preserve complete code blocks and tables, add metadata headers to each chunk, and use hierarchical chunking with summaries for long documents. Test your chunking strategy with real queries - bad chunking is the #1 cause of poor RAG performance. Tools like LlamaIndex offer smart chunking algorithms."},
+            
+            // Prompt Engineering
+            {"title":"Advanced Prompt Engineering in 2025","category":"Prompt Engineering","content":"Modern prompting combines multiple techniques: XML tags for structure, few-shot examples, chain-of-thought reasoning, role assignment, and output formatting. Best practice: start with clear instructions, provide context, use examples, specify format, and request verification. For complex tasks, break into subtasks with separate prompts. Use system messages for persistent instructions and temperature control for consistency vs creativity."},
+            {"title":"Meta-Prompting: Prompts That Write Prompts","category":"Prompt Engineering","content":"Meta-prompting uses AI to optimize prompts for specific tasks. Give the AI examples of inputs and desired outputs, and it generates optimal prompts. This works surprisingly well - often better than hand-crafted prompts. Tools like DSPy automate this process, testing variations and selecting the best. Meta-prompting is especially valuable for domain-specific applications where prompt engineering expertise is limited."},
+            {"title":"Constitutional AI Prompting","category":"Prompt Engineering","content":"Constitutional AI uses principles embedded in prompts to guide model behavior. Instead of 'don't do X', you specify positive principles: 'be helpful, harmless, and honest'. List values, provide examples of aligned behavior, and ask the model to self-critique responses. This creates more reliable, aligned behavior than negative constraints alone. Anthropic's Claude uses this approach extensively."},
+            {"title":"Prompt Caching for Cost Reduction","category":"Prompt Engineering","content":"Prompt caching (available in Claude, GPT-4, Gemini) stores repeated prompt parts to reduce costs by 50-90%. Structure prompts with static content (instructions, examples, documents) at the top and variable queries at the end. Cached content is reused across requests for 5 minutes. For applications with consistent instructions or knowledge bases, caching can reduce API costs dramatically while maintaining quality."},
+            {"title":"Few-Shot vs. Zero-Shot: When to Use Each","category":"Prompt Engineering","content":"Zero-shot works for common tasks the model already knows. Few-shot (2-5 examples) improves quality for specialized formats, domain-specific language, or consistent style. Use few-shot for: data extraction, classification with custom categories, style matching, and structured output. Use zero-shot for: general questions, common formats, and when examples are hard to provide. Test both - sometimes zero-shot surprises you."},
+            
+            // Implementation & Architecture
+            {"title":"Streaming Responses for Better UX","category":"Implementation","content":"Streaming API responses shows text as it's generated, dramatically improving perceived performance. Users see progress immediately instead of waiting seconds for complete responses. Implement with Server-Sent Events (SSE) or WebSocket connections. Handle partial responses, update UI incrementally, and allow user interruption. All major LLM APIs support streaming - it's now standard for chat applications."},
+            {"title":"Function Calling Best Practices","category":"Implementation","content":"Function calling lets AI invoke tools and APIs. Best practices: provide clear function descriptions, use descriptive parameter names, specify required vs optional parameters, include examples in descriptions, validate AI-generated arguments before execution, handle failures gracefully, and return structured results. Don't expose sensitive functions without safeguards. Use function calling for: database queries, API integrations, calculations, and data retrieval."},
+            {"title":"Structured Output with JSON Schema","category":"Implementation","content":"JSON mode and structured output (GPT-4, Claude, Gemini) guarantee valid JSON responses matching schemas. Define your schema with types, required fields, and descriptions. The model's output is constrained to match. This eliminates parsing errors and validation logic. Critical for: data extraction, form filling, database population, and API integration. Structured output is becoming standard - use it by default for programmatic interactions."},
+            {"title":"Context Window Management Strategies","category":"Implementation","content":"Managing long contexts in 2025: use summarization for older messages, implement sliding windows, prioritize recent and relevant content, use embeddings to select important context, and compress repeated information. For 100K+ token contexts, consider hierarchical summarization. Monitor token usage and cost. Some tasks benefit from multiple short-context calls over single long-context calls - test both approaches."},
+            {"title":"Rate Limiting and Error Handling","category":"Implementation","content":"Robust AI applications handle API failures gracefully. Implement exponential backoff for rate limits, retry transient errors, cache successful responses, provide user feedback during waits, and have fallback strategies. Monitor API quotas and costs. Use circuit breakers to prevent cascade failures. Log errors with context for debugging. Consider queueing for bulk operations and implementing request prioritization."},
+            
+            // Specialized Topics
+            {"title":"AI for Code Review and Testing","category":"Developer Tools","content":"AI code review in 2025 catches bugs, suggests improvements, identifies security vulnerabilities, checks style consistency, and explains complex code. Tools integrate with GitHub, GitLab, and IDEs. AI can generate test cases, write unit tests, and even fix bugs autonomously. Use for: PR reviews, legacy code documentation, test coverage, and security audits. Human oversight remains essential for critical systems."},
+            {"title":"Cursor and AI-Powered IDEs","category":"Developer Tools","content":"AI-native IDEs like Cursor, Windsurf, and Copilot Workspace transform coding into conversation. Describe features in natural language, and AI generates implementations. AI understands your entire codebase, suggests refactorings, explains code, and debugs issues. These tools increase developer productivity by 30-50% for certain tasks. Best for: rapid prototyping, boilerplate, migrations, and learning new frameworks."},
+            {"title":"AI-Generated Synthetic Data","category":"Training & Data","content":"AI models generate training data for other AI models. Use cases: creating rare edge cases, generating privacy-safe data, augmenting limited datasets, and producing labeled examples. Risks include model collapse (training on AI-generated data degrades quality over generations). Best practice: blend synthetic with real data, validate quality, and use for data augmentation not replacement. Synthetic data is transforming data-scarce domains."},
+            {"title":"Embeddings and Semantic Search","category":"Core Concepts","content":"Embeddings convert text to vectors that capture semantic meaning. Similar concepts have similar vectors. Use for: semantic search, recommendation systems, clustering, classification, and anomaly detection. Modern embedding models (OpenAI's text-embedding-3, Cohere's embed-v3) understand nuance, handle multiple languages, and can be fine-tuned. Embeddings power RAG, chatbots, and content discovery systems."},
+            {"title":"Fine-Tuning vs. Prompt Engineering","category":"Model Customization","content":"Fine-tuning specializes models on your data; prompt engineering optimizes instructions. Fine-tuning requires thousands of examples, costs more, but provides consistent style and knowledge. Prompt engineering is faster, cheaper, and more flexible. In 2025: start with prompting, use RAG for knowledge, consider fine-tuning only for specific style, format, or when prompting fails. Many use cases don't need fine-tuning anymore."},
+            {"title":"Quantization: Running Big Models Locally","category":"Optimization","content":"Quantization reduces model precision (32-bit to 4-bit or 8-bit) to enable local deployment. GGUF, GPTQ, and AWQ formats make 70B parameter models run on consumer GPUs. Quality loss is minimal for 8-bit, acceptable for 4-bit. This enables privacy-preserving AI, offline operation, and cost savings. Tools like Ollama and LM Studio make local deployment accessible. Edge AI is practical in 2025."},
+            {"title":"Mixture of Experts (MoE) Architecture","category":"Model Architecture","content":"MoE models like Mixtral and Grok activate only relevant 'expert' networks for each input, achieving better performance per compute. A 100B MoE might only use 13B parameters per token. This enables larger effective model sizes with practical inference costs. MoE models excel at diverse tasks, as different experts specialize. The architecture is becoming standard for large models in 2025."},
+            {"title":"Vision-Language Models Applications","category":"Multimodal AI","content":"VLMs in 2025 power: document understanding (OCR, layout analysis, table extraction), visual question answering, image captioning, meme understanding, chart analysis, medical image interpretation, accessibility tools, and visual search. They understand spatial relationships, read handwriting, and interpret context. Use for automating visual tasks that previously required human judgment. Accuracy approaches human-level for many applications."},
+            {"title":"AI Video Understanding","category":"Multimodal AI","content":"2025 models understand video content: tracking objects across frames, understanding temporal relationships, describing actions, detecting events, and answering questions about video content. Applications include: content moderation, video search, surveillance analysis, sports analytics, and automated video editing. Models can extract highlights, generate summaries, and identify specific moments. Video understanding is compute-intensive but increasingly practical."},
+            {"title":"Voice AI and Real-Time Conversation","category":"Multimodal AI","content":"Real-time voice AI in 2025 achieves natural conversation with minimal latency. Systems understand emotional tone, handle interruptions, and respond with appropriate prosody. Applications: phone assistants, drive-thru automation, accessibility tools, language learning, and customer service. Best implementations use streaming ASR, fast LLMs, and neural TTS. Latency under 500ms enables natural back-and-forth conversation."},
+            
+            // Ethics, Safety & Governance
+            {"title":"AI Hallucination Detection","category":"AI Safety","content":"Detecting hallucinations in 2025: use multiple models to cross-verify facts, request citations, implement confidence scoring, use RAG for factual domains, and chain-of-thought to expose reasoning. Newer models have built-in uncertainty estimation. For critical applications, combine AI with human verification. Hallucination rates have decreased but remain around 5-15% for factual queries without RAG."},
+            {"title":"Jailbreaking and Prompt Injection","category":"AI Security","content":"Prompt injection tricks models into ignoring instructions or revealing system prompts. Protection strategies: use delimiters for user input, validate outputs, implement content filters, use separate models for untrusted input, and regularly test defenses. Indirect prompt injection (via documents, websites) is harder to prevent. Security is an arms race - stay updated on attack vectors and defenses."},
+            {"title":"AI Watermarking and Detection","category":"AI Safety","content":"AI-generated content can be watermarked through subtle token distribution patterns invisible to humans. Detection tools identify AI-written text with 90%+ accuracy. However, paraphrasing can evade detection. Use cases: academic integrity, content authentication, and combating misinformation. Some jurisdictions are considering mandatory watermarking. The technology is improving but not foolproof - human verification remains important."},
+            {"title":"Bias and Fairness in AI Systems","category":"Ethics","content":"AI models reflect biases in training data. Mitigation strategies: diverse training data, bias testing across demographics, adjusting outputs for fairness, and human oversight. Document known biases and limitations. Test specifically for discrimination in sensitive applications (hiring, lending, healthcare). Fairness is contextual - define metrics appropriate to your use case. Ongoing monitoring is essential as data and models evolve."},
+            {"title":"AI Governance and Compliance","category":"Governance","content":"2025 sees increasing AI regulation: EU AI Act, US state laws, and industry-specific requirements. Key compliance areas: data privacy, transparency, auditability, bias testing, human oversight, and incident reporting. Implement AI governance frameworks: risk assessment, approval processes, documentation, monitoring, and regular audits. Use model cards to document capabilities and limitations. Compliance is becoming non-negotiable for enterprise AI."},
+            {"title":"AI and Copyright: Current Landscape","category":"Legal","content":"AI copyright in 2025 remains complex. Training on copyrighted data faces ongoing legal challenges. AI-generated content's copyright status varies by jurisdiction. Best practices: use models trained on licensed data when possible, respect content creator opt-outs, don't claim copyright on purely AI-generated work, and disclose AI use where required. The legal landscape is evolving - stay informed of developments."},
+            {"title":"Responsible AI Development","category":"Ethics","content":"Responsible AI principles: safety first (test extensively before deployment), transparency (explain capabilities and limitations), fairness (test for bias), privacy (minimize data collection), accountability (human oversight), and security (protect against misuse). Document decisions, maintain audit trails, and establish incident response procedures. Responsible AI isn't just ethics - it's risk management and brand protection."},
+            
+            // Practical Applications
+            {"title":"AI for Content Creation","category":"Applications","content":"AI content creation in 2025: blog posts, marketing copy, social media, video scripts, email campaigns, and product descriptions. Best practice: use AI for drafts and ideas, add human expertise and brand voice, fact-check everything, and disclose AI use where appropriate. AI excels at structure and variations; humans add authenticity and strategic direction. The winning approach combines both."},
+            {"title":"AI Customer Service Agents","category":"Applications","content":"AI customer service in 2025 handles 60-80% of routine queries: order status, basic troubleshooting, FAQ responses, and appointment scheduling. Advanced agents access customer databases, process returns, and escalate complex issues. Benefits: 24/7 availability, instant responses, consistent quality, and reduced costs. Key to success: seamless human handoff, access to accurate information, and continuous monitoring of customer satisfaction."},
+            {"title":"AI in Healthcare: Current Applications","category":"Applications","content":"AI healthcare applications in 2025: medical imaging analysis, clinical documentation, patient triage, drug discovery, personalized treatment planning, and administrative automation. AI assists diagnosis but doesn't replace doctors - it augments expertise. Regulatory requirements are stringent. Success requires clinical validation, integration with existing systems, and careful human oversight. The potential is enormous but implementation is complex."},
+            {"title":"AI for Education and Tutoring","category":"Applications","content":"AI tutoring provides personalized education at scale: adaptive learning paths, instant feedback, concept explanation, practice problems, and progress tracking. Effective tutors use Socratic questioning, scaffold learning, and adapt to student pace. Challenges: ensuring accuracy, preventing over-reliance, and maintaining human teacher connection. AI complements but doesn't replace teachers - best results come from blended approaches."},
+            {"title":"AI in Finance: Practical Uses","category":"Applications","content":"Financial AI applications: fraud detection, risk assessment, algorithmic trading, customer service, document processing, and financial analysis. AI excels at pattern recognition, anomaly detection, and processing vast data. Limitations: market dynamics change, models can perpetuate biases, and explainability is crucial for compliance. Financial AI requires rigorous testing, continuous monitoring, and human oversight for major decisions."},
+            {"title":"AI for Legal Research and Analysis","category":"Applications","content":"Legal AI assists with: case law research, document review, contract analysis, brief writing, and due diligence. AI can process thousands of documents in hours, identify relevant precedents, and draft initial analyses. However, legal AI requires human verification - hallucinations are unacceptable in legal work. Use AI to augment lawyers' work, not replace judgment. The technology saves time but requires expertise to use effectively."},
+            {"title":"AI Writing Assistants","category":"Applications","content":"Writing assistants help with: grammar correction, style improvement, tone adjustment, summarization, expansion, and translation. They adapt to your voice over time and provide context-aware suggestions. Use for: email drafting, document editing, content brainstorming, and language learning. Best results: use AI as a collaborator, not a replacement. Your expertise and judgment remain essential for quality and authenticity."},
+            {"title":"AI for Data Analysis","category":"Applications","content":"AI data analysis tools interpret datasets, generate visualizations, identify patterns, and explain findings in natural language. Upload data, ask questions, and get insights. Applications: business intelligence, scientific research, marketing analytics, and financial analysis. AI excels at exploratory analysis and finding non-obvious patterns. However, verify results and understand limitations - correlation isn't causation."},
+            {"title":"AI Image Generation and Editing","category":"Creative AI","content":"2025 image AI: photorealistic generation, style transfer, inpainting, upscaling, and video-to-image. Tools like DALL-E 3, Midjourney v7, and Stable Diffusion 3 create professional-quality images from text. Use for: marketing materials, concept art, product mockups, and creative exploration. Limitations: struggles with text in images, some uncanny valley effects, and copyright considerations. Always verify and refine AI-generated images."},
+            {"title":"AI Music and Audio Generation","category":"Creative AI","content":"AI generates music, sound effects, voice cloning, and audio enhancement. Applications: content creation, game audio, podcast editing, and accessibility. Models like MusicGen and AudioCraft create original compositions in various styles. Voice cloning enables content in multiple languages. Ethical considerations: consent for voice cloning, copyright for training data, and disclosure of AI-generated content."},
+            {"title":"AI Video Generation and Editing","category":"Creative AI","content":"AI video tools: text-to-video generation, automated editing, style transfer, face swapping, and enhancement. Create short videos from text prompts, auto-edit raw footage, or enhance quality. Applications: content creation, advertising, education, and entertainment. Current limitations: consistency across frames, longer videos, and fine control. The technology is rapidly improving - expect major advances in 2025."},
+            
+            // Advanced Topics
+            {"title":"Reinforcement Learning from Human Feedback (RLHF)","category":"Training","content":"RLHF trains models to align with human preferences by having humans rank outputs. The model learns what humans consider helpful, harmless, and honest. This technique transformed LLMs from completing text to following instructions. Challenges: human feedback is expensive, preferences vary, and models can game metrics. RLHF is why ChatGPT feels conversational compared to raw GPT-3."},
+            {"title":"Direct Preference Optimization (DPO)","category":"Training","content":"DPO is a simpler alternative to RLHF that directly optimizes for human preferences without a separate reward model. It's more stable, requires less compute, and often performs as well as RLHF. DPO is becoming popular for fine-tuning open-source models. It enables smaller teams to align models with their specific preferences without RLHF's complexity and computational requirements."},
+            {"title":"Attention Mechanisms Explained","category":"Technical Deep Dive","content":"Attention lets models focus on relevant parts of input when generating each output token. In 'The cat sat on the mat', attention helps the model know 'sat' relates to 'cat' not 'mat'. Self-attention compares all input positions, creating rich contextual representations. This mechanism enables transformers to understand long-range dependencies and is why modern LLMs understand context so well."},
+            {"title":"Transformer Architecture Fundamentals","category":"Technical Deep Dive","content":"Transformers revolutionized AI by processing all input tokens simultaneously using attention mechanisms, unlike sequential RNNs. Key components: multi-head attention (parallel attention patterns), feed-forward networks (transformation layers), and positional encoding (position information). Transformers scale efficiently, enabling GPT, BERT, and modern LLMs. Understanding transformers helps debug issues, optimize prompts, and predict model behavior."},
+            {"title":"Tokenization and Its Impact","category":"Technical Details","content":"Tokenization breaks text into subword units. Common words are single tokens; rare words split into multiple. This affects: character limits (measured in tokens not words), model understanding (word boundaries matter), API costs (priced per token), and prompt design. BPE and WordPiece are common algorithms. Understanding tokenization helps optimize prompts and predict costs. Use tokenizer tools to preview before API calls."},
+            {"title":"Temperature and Sampling Strategies","category":"Parameters","content":"Temperature controls randomness: 0 is deterministic (always picks most likely token), 1 is balanced, higher is more creative/random. For factual tasks use 0-0.3, for creative writing use 0.7-1.0. Top-p (nucleus sampling) limits choices to most probable tokens. Combining low temperature and high top-p gives focused but varied outputs. Experiment to find the right balance for your use case."},
+            {"title":"Model Context Protocols (MCP)","category":"Integration","content":"MCP standardizes how AI models access external data and tools. Instead of custom integrations for each model, MCP provides a unified protocol. Models can query databases, access files, call APIs, and use tools through standardized interfaces. This enables portable AI agents that work across different models and platforms. Anthropic's MCP is gaining adoption as an industry standard."},
+            {"title":"AI Model Benchmarks: What They Mean","category":"Evaluation","content":"Common benchmarks: MMLU (general knowledge), HumanEval (coding), GSM8K (math), HELM (comprehensive). These measure capabilities but have limitations - models optimize for tests, and benchmarks don't capture all real-world use. Consider multiple metrics: accuracy, speed, cost, reasoning depth, and real user feedback. Don't choose models by benchmarks alone - test with your actual use cases."},
+            {"title":"Latency Optimization Strategies","category":"Performance","content":"Reducing AI latency: use faster models (Claude Haiku, GPT-3.5), implement streaming, cache common queries, use smaller prompts, batch requests, enable prompt caching, and consider edge deployment. For real-time applications, latency matters more than marginal quality gains. Test different models - sometimes a faster model with 95% quality beats a slower one with 98% quality for user experience."},
+            {"title":"Cost Optimization for AI Applications","category":"Operations","content":"Reducing AI costs: use appropriate models (don't default to most expensive), implement caching, optimize prompts (shorter = cheaper), batch requests, use streaming to stop early when satisfied, monitor usage patterns, set up alerts, and consider self-hosted alternatives for high volume. Small optimizations compound - reducing average tokens by 20% cuts costs by 20%. Track costs per user/feature to identify optimization opportunities."},
+            {"title":"A/B Testing AI Features","category":"Product Development","content":"Test AI features like any product: define metrics (accuracy, user satisfaction, task completion), establish baselines, run controlled experiments, and measure results. Key considerations: sample size for statistical significance, user feedback collection, edge case analysis, and long-term behavior changes. AI outputs vary - test multiple times and measure distributions, not single examples. Iterate based on data, not intuition."},
+            {"title":"Observability and Monitoring","category":"Operations","content":"Monitor AI systems: track latency, costs, error rates, output quality, user feedback, and prompt injection attempts. Log inputs/outputs for debugging (respecting privacy). Set up alerts for anomalies. Use tools like LangSmith, Weights & Biases, or custom solutions. Good observability enables rapid issue detection, performance optimization, and understanding user behavior. It's essential for production AI systems."},
+            {"title":"AI System Architecture Patterns","category":"Architecture","content":"Common patterns: chatbot (conversation management + context), RAG (retrieval + generation), agent (planning + execution + reflection), pipeline (sequential processing), and multi-model (specialist models for different tasks). Choose based on requirements: chatbots for simple Q&A, RAG for knowledge-heavy domains, agents for complex tasks, pipelines for predictable workflows, multi-model for diverse capabilities."},
+            {"title":"Version Control for AI Systems","category":"Best Practices","content":"Version AI systems properly: track prompt versions, model versions, data versions, and dependency versions. Use semantic versioning for prompts, store in version control, document changes, and maintain test suites. This enables: rollback when issues arise, A/B testing, reproducibility, and understanding performance changes. Treat prompts as code - they're critical system components that deserve professional management."},
+            {"title":"Edge AI Deployment","category":"Deployment","content":"Running AI on devices enables: offline operation, reduced latency, enhanced privacy, and lower long-term costs. Challenges: limited compute, memory, and power. Solutions: model quantization, distillation, and specialized models. Use cases: mobile apps, IoT devices, vehicles, and privacy-sensitive applications. Edge AI is practical in 2025 with efficient models and hardware acceleration (NPUs, optimized chips)."},
+            {"title":"AI for Accessibility","category":"Social Impact","content":"AI accessibility applications: screen readers, real-time captioning, image descriptions, voice control, text simplification, sign language translation, and cognitive assistance. AI makes digital content accessible to people with disabilities. Design considerations: avoid relying solely on AI (provide fallbacks), ensure accuracy for critical information, and involve disabled users in testing. AI dramatically improves accessibility but requires thoughtful implementation."},
+            {"title":"Environmental Impact of AI","category":"Sustainability","content":"AI training and inference consume significant energy. Large model training can emit hundreds of tons of CO2. Mitigation: use efficient models, optimize inference, leverage model APIs (amortizes training costs), use renewable energy, and consider carbon offsets. Not all AI is equal - inference costs far exceed training for production systems. Choose appropriate model sizes and optimize deployment for sustainability."},
+            {"title":"The Future of AI: 2025 and Beyond","category":"Trends","content":"Emerging trends: multimodal models become standard, AI agents handle complex workflows, personalized AI understands individual preferences, reasoning capabilities improve dramatically, edge AI enables new applications, regulation shapes development, and open-source models reach parity with commercial offerings. The shift from chatbots to capable agents will transform how we interact with computers. We're moving from AI as a tool to AI as a collaborator."}
+        ];
+
         let currentLesson = null;
         let lessonsExplored = 0;
-        let isLoading = false;
-        let usedTopics = [];
+        let shownIndices = [];
 
-        async function getNewLesson() {
-            if (isLoading) return;
-            
-            isLoading = true;
-            const button = event.target;
-            const originalText = button.textContent;
-            button.textContent = '⏳ Generating lesson...';
-            button.disabled = true;
-
-            try {
-                // Generate a fresh lesson using Claude API
-                const response = await fetch("https://api.anthropic.com/v1/messages", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        model: "claude-sonnet-4-20250514",
-                        max_tokens: 1000,
-                        messages: [{
-                            role: "user",
-                            content: `Generate a single, educational lesson about a current AI or tech topic for February 2025. 
-
-Requirements:
-- Focus on recent developments, tools, or concepts relevant in early 2025
-- Make it practical and useful for someone learning about AI
-- Keep the content around 100-150 words
-- Avoid these topics if possible: ${usedTopics.slice(-10).join(', ')}
-
-Return ONLY a JSON object in this exact format (no markdown, no code blocks):
-{
-  "title": "Specific, compelling title",
-  "category": "Broad category (e.g., 'AI Tools', 'Machine Learning', 'Ethics', 'Applications')",
-  "content": "Educational content explaining the topic clearly with practical insights"
-}`
-                        }]
-                    })
-                });
-
-                const data = await response.json();
-                
-                // Parse the response
-                let lessonText = data.content[0].text.trim();
-                
-                // Remove markdown code blocks if present
-                lessonText = lessonText.replace(/```json\n?/g, '').replace(/```\n?/g, '');
-                
-                const lesson = JSON.parse(lessonText);
-                
-                // Track this topic
-                usedTopics.push(lesson.title);
-                
-                currentLesson = lesson;
-                displayLesson(currentLesson);
-                lessonsExplored++;
-                updateStats();
-                document.getElementById('exportBtn').disabled = false;
-
-            } catch (error) {
-                console.error('Error generating lesson:', error);
-                alert('Failed to generate lesson. Please try again.');
-            } finally {
-                isLoading = false;
-                button.textContent = originalText;
-                button.disabled = false;
+        function getNewLesson() {
+            // If all lessons have been shown, reset
+            if (shownIndices.length === lessons.length) {
+                shownIndices = [];
+                alert('You\'ve seen all ' + lessons.length + ' lessons! Starting over.');
             }
+
+            // Get a random lesson that hasn't been shown yet
+            let availableIndices = lessons.map((_, i) => i).filter(i => !shownIndices.includes(i));
+            let randomIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
+            shownIndices.push(randomIndex);
+
+            currentLesson = lessons[randomIndex];
+            displayLesson(currentLesson);
+            lessonsExplored++;
+            updateStats();
+            document.getElementById('exportBtn').disabled = false;
         }
 
         function displayLesson(lesson) {
@@ -269,8 +310,9 @@ Return ONLY a JSON object in this exact format (no markdown, no code blocks):
         }
 
         function updateStats() {
+            const remaining = lessons.length - shownIndices.length;
             document.getElementById('stats').textContent = 
-                `Lessons explored: ${lessonsExplored} | Fresh AI-generated lessons - unlimited!`;
+                `Lessons explored: ${lessonsExplored} | Remaining: ${remaining} of ${lessons.length}`;
         }
 
         function exportToPDF() {
